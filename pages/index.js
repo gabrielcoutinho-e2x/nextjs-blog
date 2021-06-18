@@ -21,25 +21,15 @@ export default function Home({ allPostsData }) {
   useEffect(() => {
     window.addEventListener(
       "message",
-      function (event) {
+      (event) => {
         console.log("Received post message", event);
       },
       false
     );
-
-    return () => {
-      window.removeEventListener(
-        "message",
-        function (event) {
-          console.log("Received post message", event);
-        },
-        false
-      );
-    };
-  });
+  }, []);
 
   const sendMessage = () => {
-    console.log("Send post message");
+    console.log("Send post message from web");
     window.postMessage("Post message from web", "*");
   };
 
@@ -71,7 +61,7 @@ export default function Home({ allPostsData }) {
           ))}
         </ul>
       </section>
-      <Button onClick={sendMessage}>Show Toast</Button>
+      <Button onClick={sendMessage}>Send post message from web</Button>
     </Layout>
   );
 }
